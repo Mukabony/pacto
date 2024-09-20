@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  basePath: '/pactodash',
+  // Remova as configurações de output e basePath
   images: {
-    unoptimized: true,
+    domains: ['cdn.prod.website-files.com'], // Adicione este domínio para permitir imagens externas
   },
 };
 

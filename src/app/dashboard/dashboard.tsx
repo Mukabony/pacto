@@ -30,9 +30,18 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-console.log("Firebase inicializado");
+let app;
+let db;
+
+if (typeof window !== 'undefined') {
+  try {
+    app = initializeApp(firebaseConfig);
+    db = getFirestore(app);
+    console.log("Firebase inicializado");
+  } catch (error) {
+    console.error("Erro ao inicializar Firebase:", error);
+  }
+}
 
 function groupByDay(assinaturas: Assinatura[]): AssinaturasPorDia {
   return assinaturas.reduce((acc, assinatura) => {
@@ -69,6 +78,13 @@ export default function Dashboard() {
   }, []);
 
   useEffect(() => {
+    if (!db) {
+      console.error("Firebase não inicializado");
+      setError("Erro ao conectar com o banco de dados");
+      setLoading(false);
+      return;
+    }
+
     console.log("Dashboard component mounted");
     setLoading(true);
     const assinaturasRef = collection(db, "assinaturas");
