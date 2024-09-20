@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: '/nome-do-repositorio',
+  basePath: '/pactodash',
   images: {
     unoptimized: true,
   },
