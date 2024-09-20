@@ -155,12 +155,6 @@ export default function Dashboard() {
             />
             <CardTitle className="text-3xl font-bold text-center text-primary">Assinaturas do Pacto Pelo Agora</CardTitle>
             <SignatureCounter count={totalAssinaturas} />
-            <Link
-              href="/"
-              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-            >
-              Voltar para a página inicial
-            </Link>
           </CardHeader>
           <CardContent>
             <ScrollArea className="h-[70vh]">
