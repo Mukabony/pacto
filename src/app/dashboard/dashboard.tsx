@@ -3,8 +3,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Image from "next/image";
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { initializeApp, FirebaseApp } from "firebase/app";
+import { getFirestore, Firestore, collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import Link from 'next/link';
 
 interface Assinatura {
   id: string;
@@ -30,8 +31,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-let app;
-let db;
+let app: FirebaseApp | undefined;
+let db: Firestore | undefined;
 
 if (typeof window !== 'undefined') {
   try {
@@ -124,11 +125,19 @@ export default function Dashboard() {
   }, [totalAssinaturas]);
 
   if (loading) {
-    return <div>Carregando assinaturas...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg">Carregando assinaturas...</p>
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Erro: {error}</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-lg text-red-500">Erro: {error}</p>
+      </div>
+    );
   }
 
   return (
@@ -146,6 +155,12 @@ export default function Dashboard() {
             />
             <CardTitle className="text-3xl font-bold text-center text-primary">Assinaturas do Pacto Pelo Agora</CardTitle>
             <SignatureCounter count={totalAssinaturas} />
+            <Link
+              href="/"
+              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+            >
+              Voltar para a página inicial
+            </Link>
           </CardHeader>
           <CardContent>
             <ScrollArea className="h-[70vh]">
