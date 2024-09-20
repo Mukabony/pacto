@@ -5,7 +5,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import Image from "next/image";
 import { initializeApp, FirebaseApp } from "firebase/app";
 import { getFirestore, Firestore, collection, query, orderBy, onSnapshot } from "firebase/firestore";
-import Link from 'next/link';
 
 interface Assinatura {
   id: string;
